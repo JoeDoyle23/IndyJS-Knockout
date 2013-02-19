@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Indy.js Knockout Examples - Basic Data-Binding</title>
+  <link type="text/css" rel="stylesheet" media="all" href="../lib/bootstrap/css/bootstrap.min.css">
+  <link type="text/css" rel="stylesheet" media="all" href="../lib/google-code-prettify/prettify.css">
+</head>
+<body onload="prettyPrint()">
+
+<div class="container">
+	<h2>Basic Data-Binding</h2>
+
+	<div class="well">
+		<p>First Name <input data-bind="value: firstName" /></p>
+		<p>Last Name <input data-bind="value: lastName" /></p>
+		<p>Hello there, <span data-bind="text: fullName"></span>!</p>
+	</div>
+
+Markup:	
+<pre class="prettyprint">
+&lt;div&gt;
+  &lt;p&gt;First Name &lt;input data-bind="value: firstName" /&gt;&lt;/p&gt;
+  &lt;p&gt;Last Name &lt;input data-bind="value: lastName" /&gt;&lt;/p&gt;
+  &lt;p&gt;Hello there, &lt;span data-bind="text: fullName"&gt;&lt;/span&gt;!&lt;/p&gt;	
+&lt;/div&gt;
+</pre>
+
+JavaScript:
+<pre class="prettyprint">
+var ViewModel = function(first, last) {
+  this.firstName = ko.observable(first);
+  this.lastName = ko.observable(last);
+  
+  this.fullName = ko.computed(function() {
+    // Knockout tracks dependencies automatically. It knows that fullName depends on 
+    // firstName and lastName, because these get called when evaluating fullName.
+    return this.firstName() + " " + this.lastName();
+  }, this);
+};
+ 
+ko.applyBindings(new ViewModel("My", "Friend"));
+</pre>
+<p>
+	<a class="btn" href="lists.html">Next - Lists &gt;</a>
+</p>
+<p>
+	<a class="btn" href="../index.html">Home</a>
+</p>
+
+<div>
+<script src="../lib/google-code-prettify/prettify.js"></script>
+<script src="../lib/knockout-2.2.1.js"></script>
+<script src="../lib/knockout.mapping-2.4.1.js"></script>
+
+<script>
+var ViewModel = function(first, last) {
+    this.firstName = ko.observable(first);
+    this.lastName = ko.observable(last);
+ 
+    this.fullName = ko.computed(function() {
+        // Knockout tracks dependencies automatically. It knows that fullName depends on firstName and lastName, because these get called when evaluating fullName.
+        return this.firstName() + " " + this.lastName();
+    }, this);
+};
+
+ 
+ko.applyBindings(new ViewModel("My", "Friend"));
+</script>
+</body>
+</html>

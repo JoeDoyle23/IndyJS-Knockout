@@ -1,0 +1,12 @@
+﻿{
+  "name": "indyjs-knockout",
+  "description": "Code samples from the Indy.js Knockout Presentation",
+  "author": "Joe Doyle <joe@joedoyle.us>",
+  "version": "1.0.0",
+  "keywords": [
+    "knockout",
+    "tutorial",
+    "examples"
+  ],
+  "license": "MIT"
+}
