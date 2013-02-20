@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Indy.js Knockout Examples - Lists</title>
+  <title>Indy.js Knockout Examples - Lists & Collections</title>
   <link type="text/css" rel="stylesheet" media="all" href="../lib/bootstrap/css/bootstrap.min.css">
   <link type="text/css" rel="stylesheet" media="all" href="../lib/google-code-prettify/prettify.css">
 </head>
 <body onload="prettyPrint()">
 
 <div class="container">
-	<h2>Lists</h2>
+	<h2>Lists & Collections</h2>
 
 	<p>
 		<form class="form-inline">
@@ -32,6 +32,12 @@
 		</tbody>	
 	</table>
 
+	<ul>
+		<!-- ko foreach: tasks -->
+		<li>(<span data-bind="text: id"></span>) <span data-bind="text: name"></span></li>
+		<!-- /ko -->	
+	</ul>
+	
 	<hr />
 Markup:	
 <pre class="prettyprint">
@@ -53,6 +59,12 @@ Markup:
   	&lt;/tr&gt;
   &lt;/tbody&gt;	
 &lt;/table&gt;
+
+&lt;ul&gt;
+  &lt;!-- ko foreach: tasks --&gt;
+  &lt;li&gt;(&lt;span data-bind="text: id"&gt;&lt;/span&gt;) &lt;span data-bind="text: name"&gt;&lt;/span&gt;&lt;/li&gt;
+  &lt;!-- /ko --&gt;	
+&lt;/ul&gt;
 </pre>
 
 JavaScript:
@@ -89,7 +101,6 @@ ko.applyBindings(new ViewModel());
 <div>
 <script src="../lib/google-code-prettify/prettify.js"></script>
 <script src="../lib/knockout-2.2.1.js"></script>
-<script src="../lib/knockout.mapping-2.4.1.js"></script>
 
 <script>
 var ViewModel = function() {

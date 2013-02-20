@@ -15,6 +15,15 @@
 		<p>First Name <input data-bind="value: firstName" /></p>
 		<p>Last Name <input data-bind="value: lastName" /></p>
 		<p>Hello there, <span data-bind="text: fullName"></span>!</p>
+		
+		<select data-bind="value: color">
+			<option value="Red">Red</option>
+			<option value="Green">Green</option>
+			<option value="Blue">Blue</option>
+			<option value="Purple">Purple</option>
+		</select>
+		
+		You picked <span data-bind="text: color, style: { color: color} "></span>
 	</div>
 
 Markup:	
@@ -22,7 +31,16 @@ Markup:
 &lt;div&gt;
   &lt;p&gt;First Name &lt;input data-bind="value: firstName" /&gt;&lt;/p&gt;
   &lt;p&gt;Last Name &lt;input data-bind="value: lastName" /&gt;&lt;/p&gt;
-  &lt;p&gt;Hello there, &lt;span data-bind="text: fullName"&gt;&lt;/span&gt;!&lt;/p&gt;	
+  &lt;p&gt;Hello there, &lt;span data-bind="text: fullName"&gt;&lt;/span&gt;!&lt;/p&gt;
+  
+  &lt;select data-bind="value: color"&gt;
+    &lt;option value="Red"&gt;Red&lt;/option&gt;
+    &lt;option value="Green"&gt;Green&lt;/option&gt;
+    &lt;option value="Blue"&gt;Blue&lt;/option&gt;
+    &lt;option value="Purple"&gt;Purple&lt;/option&gt;
+  &lt;/select&gt;
+  
+  You picked &lt;span data-bind="text: color, style: { color: color} "&gt;&lt;/span&gt;
 &lt;/div&gt;
 </pre>
 
@@ -37,12 +55,14 @@ var ViewModel = function(first, last) {
     // firstName and lastName, because these get called when evaluating fullName.
     return this.firstName() + " " + this.lastName();
   }, this);
+  
+  this.color = ko.observable();
 };
  
 ko.applyBindings(new ViewModel("My", "Friend"));
 </pre>
 <p>
-	<a class="btn" href="lists.html">Next - Lists &gt;</a>
+	<a class="btn" href="lists.html">Next - Lists & Collections &gt;</a>
 </p>
 <p>
 	<a class="btn" href="../index.html">Home</a>
@@ -62,6 +82,8 @@ var ViewModel = function(first, last) {
         // Knockout tracks dependencies automatically. It knows that fullName depends on firstName and lastName, because these get called when evaluating fullName.
         return this.firstName() + " " + this.lastName();
     }, this);
+	
+	this.color = ko.observable();
 };
 
  
