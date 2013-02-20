@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Indy.js Knockout Examples - Unit Testing</title>
+  <link type="text/css" rel="stylesheet" media="all" href="../lib/bootstrap/css/bootstrap.min.css">
+  <link type="text/css" rel="stylesheet" media="all" href="../lib/google-code-prettify/prettify.css">
+</head>
+<body onload="prettyPrint()">
+
+<div class="container">
+	<h2>Unit Testing your ViewModel</h2>
+
+JavaScript:
+<pre class="prettyprint">
+var ViewModel = function() {
+  var self = this;
+  self.tasks = ko.observableArray([]);
+  self.newTask = ko.observable();
+  self.id=0;
+  
+  self.addTask = function() {
+    self.tasks.push({ 
+  	  id: this.id++,
+  	  name: self.newTask()
+  	});
+    self.newTask('');
+  };	
+  
+  self.removeTask = function(task) {
+    self.tasks.remove(task);
+  };
+};
+ 
+ko.applyBindings(new ViewModel());
+</pre>
+QUnit Tests:	
+<pre class="prettyprint">
+test("addTask pushes newTask value into tasks", function() {
+	var viewModel = new ViewModel();
+	viewModel.newTask('a task');
+	
+	viewModel.addTask();
+	
+	equal(viewModel.tasks()[0].name, 'a task', 'first task is added to tasks');
+});
+</pre>
+
+<a href="qunit.html" target="_blank" class="btn btn-primary">Run QUnit Tests</a>
+<br/><br/>
+<p>
+	<a class="btn" href="savingdata.html">&lt; Previous - Saving Data</a>
+</p>
+<p>
+	<a class="btn" href="../index.html">Home</a>
+</p>
+
+<div>
+<script src="../lib/google-code-prettify/prettify.js"></script>
+</body>
+</html>
