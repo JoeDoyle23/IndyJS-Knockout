@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Indy.js Knockout Examples - Lists & Collections</title>
+  <title>Indy.js Knockout Examples - Saving Data</title>
   <link type="text/css" rel="stylesheet" media="all" href="../lib/bootstrap/css/bootstrap.min.css">
   <link type="text/css" rel="stylesheet" media="all" href="../lib/google-code-prettify/prettify.css">
 </head>
 <body onload="prettyPrint()">
 
 <div class="container">
-	<h2>Lists & Collections</h2>
+	<h2>Saving Data from your ViewModel</h2>
 
 	<p>
 		<form class="form-inline">
@@ -38,6 +38,10 @@
 		<!-- /ko -->	
 	</ul>
 	
+	<button type="button" class="btn btn-primary" data-bind="click: saveData">Save Data</button>
+	<br/><br/>
+	<textarea data-bind="value: rawJson" cols="30"></textarea>
+	
 	<hr />
 Markup:	
 <pre class="prettyprint">
@@ -65,6 +69,10 @@ Markup:
   &lt;li&gt;(&lt;span data-bind="text: id"&gt;&lt;/span&gt;) &lt;span data-bind="text: name"&gt;&lt;/span&gt;&lt;/li&gt;
   &lt;!-- /ko --&gt;	
 &lt;/ul&gt;
+
+&lt;button type="button" class="btn btn-primary" data-bind="click: saveData"&gt;Save Data&lt;/button&gt;
+&lt;br/&gt;&lt;br/&gt;
+&lt;textarea data-bind="value: rawJson" cols="30"&gt;&lt;/textarea&gt;
 </pre>
 
 JavaScript:
@@ -85,31 +93,23 @@ var ViewModel = function() {
   
   self.removeTask = function(task) {
     self.tasks.remove(task);
-  }; 
+  };
+  
+  self.rawJson = ko.observable();
+  self.saveData = function() {
+    var json = ko.toJSON(self);  //We can now send our model as JSON to the server.
+	self.rawJson(json);
+	
+    //There is also toJSON on the mapping plugin
+    var json = ko.mapping.toJSON(self);
+  };
 };
  
 ko.applyBindings(new ViewModel());
 </pre>
 
-Observable Arrays:
-<pre class="prettyprint">
- Get values as an array:
-   var values = self.tasks();
-   var first = self.tasks()[0];
-
- Add new item:
-   self.tasks.push(newTask);
-
- Remove an item:
-   self.tasks.remove(doneTask);
-
- Exposes many native array methods directly:
-    pop, push, shift, unshift, reverse, sort, slice, splice
-   
-</pre>
-
 <p>
-	<a class="btn" href="basic.html">&lt; Previous - Basic Data-binding</a>
+	<a class="btn" href="mapping.html">&lt; Previous - Mapping the Model to the ViewModel</a>
 	<a class="btn" href="mapping.html">Next - Mapping the Model to the ViewModel &gt;</a>
 </p>
 <p>
@@ -138,6 +138,12 @@ var ViewModel = function() {
 	self.removeTask = function(task) {
 		self.tasks.remove(task);
 	}; 
+	
+	self.rawJson = ko.observable();
+	self.saveData = function() {
+		var json = ko.toJSON(self);
+		self.rawJson(json);
+	};
 };
  
 ko.applyBindings(new ViewModel());

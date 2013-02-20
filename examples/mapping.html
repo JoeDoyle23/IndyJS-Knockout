@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Indy.js Knockout Examples - Using Data</title>
+  <title>Indy.js Knockout Examples - Mapping Data</title>
   <link type="text/css" rel="stylesheet" media="all" href="../lib/bootstrap/css/bootstrap.min.css">
   <link type="text/css" rel="stylesheet" media="all" href="../lib/google-code-prettify/prettify.css">
 </head>
@@ -10,7 +10,7 @@
 
 <div class="container">
 
-<h2>Data</h2>
+<h2>Mapping the Model to the ViewModel</h2>
 
 Simple Mapping:
 <pre class="prettyprint">
@@ -48,22 +48,33 @@ var ViewModel = function(data) {
   
   return self;
 };
- 
+//Maybe we front-load the data as part of the page 
 var data = {
-  poeple: [
-  { name: 'Joe', quest: 'Find holy grail', color: 'blue' },
-  { name: 'Gene', quest: 'Wanna rock n roll all night long', color: 'black' },
-  ],
-  
+  city: 'Indianapolis',
+  state: 'Indiana',
+  people: [
+  { name: 'Sir Lancelot', quest: 'Find holy grail', color: 'blue', tags: [ '1', '2' ]},
+  { name: 'KISS', quest: 'Wanna rock n roll all night long', color: 'black', tags: [ '3', '4' ] },
+  ]  
 }; 
+
+//Or we can get it from the server:
+$.post('/api/people')
+  .done(function(result) {
+    data=result;
+  });
  
-ko.applyBindings(new ViewModel({ firstName: "My", lastName: "Friend"));
+ko.applyBindings(new ViewModel(data);
 </pre>
 
+Now we can bind to our complex structure:
+<pre class="prettyprint">
+&lt;span data-bind="text: people()[0].name"&gt;&lt;/span&gt;
+</pre>
 
 <p>
 	<a class="btn" href="lists.html">&lt; Back - Lists & Collections</a>
-	<a class="btn" href="events.html">Next - Events</a>
+	<a class="btn" href="savingdata.html">Next - Saving Data</a>
 </p>
 <p>
 	<a class="btn" href="../index.html">Home</a>
@@ -71,9 +82,6 @@ ko.applyBindings(new ViewModel({ firstName: "My", lastName: "Friend"));
 
 <div>
 <script src="../lib/google-code-prettify/prettify.js"></script>
-<script src="../lib/knockout-2.2.1.js"></script>
-<script src="../lib/knockout.mapping-2.4.1.js"></script>
-
 
 </body>
 </html>
