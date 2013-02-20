@@ -97,7 +97,7 @@ var ViewModel = function() {
   
   self.rawJson = ko.observable();
   self.saveData = function() {
-    var json = ko.toJSON(self);  //We can now send our model as JSON to the server.
+    var json = ko.toJSON(self, null, 2);  //We can now send our model as JSON to the server.
 	self.rawJson(json);
 	
     //There is also toJSON on the mapping plugin
@@ -141,7 +141,7 @@ var ViewModel = function() {
 	
 	self.rawJson = ko.observable();
 	self.saveData = function() {
-		var json = ko.toJSON(self);
+		var json = ko.toJSON(self, null, 2);
 		self.rawJson(json);
 	};
 };

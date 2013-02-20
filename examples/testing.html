@@ -44,6 +44,25 @@ test("addTask pushes newTask value into tasks", function() {
 	
 	equal(viewModel.tasks()[0].name, 'a task', 'first task is added to tasks');
 });
+
+test("after addTask pushes newTask value into tasks, newTask is cleared", function() {
+	var viewModel = new ViewModel();
+	viewModel.newTask('a task');
+	
+	viewModel.addTask();
+	
+	equal(viewModel.newTask(), '', 'newTask is cleared');
+});
+
+test("removeTask removes value from tasks", function() {
+	var viewModel = new ViewModel();
+	viewModel.newTask('a task');
+	viewModel.addTask();
+
+	viewModel.removeTask(viewModel.tasks()[0]);
+	
+	equal(viewModel.tasks().length, 0, 'task has been removed');
+});
 </pre>
 
 <a href="qunit.html" target="_blank" class="btn btn-primary">Run QUnit Tests</a>

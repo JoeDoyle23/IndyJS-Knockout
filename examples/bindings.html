@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Indy.js Knockout Examples - Types of Bindings</title>
+  <link type="text/css" rel="stylesheet" media="all" href="../lib/bootstrap/css/bootstrap.min.css">
+  <link type="text/css" rel="stylesheet" media="all" href="../lib/google-code-prettify/prettify.css">
+  
+</head>
+<body onload="prettyPrint()">
+
+<div class="container">
+	<h2>Types of Bindings</h2>
+
+Display Bindings
+<pre class="prettyprint">
+&lt;span data-bind="text: firstName"&gt;&lt;/span&gt;
+
+&lt;input type="text" data-bind="value: firstName" /&gt;
+
+&lt;span data-bind="html: pageSnippet"&gt;&lt;/span&gt;
+
+&lt;div data-bind="visible: showGreeting"&gt;Hi!&lt;/div&gt;
+
+&lt;input data-bind="enable: inputEnabled" /&gt;
+
+&lt;input data-bind="disable: inputDisabled" /&gt;
+
+&lt;div data-bind="css: { bold: showAsBold, red: showAsRed }"&gt;Hi!&lt;/div&gt;
+
+&lt;span data-bind="style: { color: textColor }"&gt;Hi!&lt;/span&gt;
+
+&lt;div data-bind="attr: { id: itemId}"&gt;Hi!&lt;/div&gt;
+</pre>
+
+Flow Control Bindings
+<pre class="prettyprint">
+&lt;table&gt;
+  &lt;tbody data-bind="foreach: tasks"&gt;
+    &lt;tr&gt;&lt;td&gt;Repeat!&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;div data-bind="with: childValue" &gt;
+  &lt;span data-bind="text: childProp"&gt;&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;div data-bind="if: showGreeting"&gt;Hi!&lt;/div&gt;
+
+&lt;div data-bind="ifnot: showGreeting"&gt;Grumble, grumble&lt;/div&gt;
+</pre>
+
+Interaction Bindings
+<pre class="prettyprint">
+click binding - calls function on the ViewModel on the click event
+
+event binding - calls a function on the ViewModel when the specified event fires
+ - Can be any DOM event.  Exmaples: keypress, mouseover, mouseout
+ 
+submit binding - typically bound to the form element. Tiggers function on submit.
+ 
+hasfocus binding - Does the bound element have the focus?
+ 
+checked binding - Used instead of the value binding for checkboxes and radio buttons
+
+options binding - Supplies a dyanmic list of options to a select element
+
+selectedOptions binding - Allows for binding to a multi-select element.
+ 
+uniqueName binding - Adds a unique name property to the bound element, mainly used to support jQuery validation.
+</pre>
+
+<p>
+	<a class="btn" href="basic.html">&lt; Previous - Basic Data-binding</a>
+	<a class="btn" href="observables.html">Next - Working with Observables &gt;</a>
+
+</p>
+<p>
+	<a class="btn" href="../index.html">Home</a>
+</p>
+
+<div>
+<script src="../lib/google-code-prettify/prettify.js"></script>
+
+</body>
+</html>
