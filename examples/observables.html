@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Indy.js Knockout Examples - Working with Observables</title>
+  <link type="text/css" rel="stylesheet" media="all" href="../lib/bootstrap/css/bootstrap.min.css">
+  <link type="text/css" rel="stylesheet" media="all" href="../lib/google-code-prettify/prettify.css">
+  
+</head>
+<body onload="prettyPrint()">
+
+<div class="container">
+	<h2>Working with Observables</h2>
+
+Basic Observables:	
+<pre class="prettyprint">
+// Create an observable
+name = ko.observable();
+
+// Create an observable and give it an initial value
+name = ko.observable('Joe');
+
+// Get the value from the observable
+var theName = name();
+
+// Update the value in the observable
+name('Joseph');
+</pre>
+
+Observable Arrays:
+<pre class="prettyprint">
+//Creating an observable array
+var tasks = ko.observableArray();
+
+// Get values as an array
+var values = tasks();
+var first = tasks()[0];
+
+//Add new item
+tasks.push(newTask);
+
+// Remove an item
+tasks.remove(doneTask);
+
+// Exposes many native array methods directly:
+//   pop, push, shift, unshift, reverse, sort, slice, splice
+</pre>
+
+Computed Observables:
+<pre class="prettyprint">
+//Creating a computed observable
+var nameBang = ko.computed(function() {
+  return name() + '!';
+});
+
+//When the value of name changes, the value of nameBang gets updated as well
+</pre>
+
+Subscribing to changes:
+<pre class="prettyprint">
+//We can call functions when a observable changes
+var name = ko.observable();
+
+name.subscribe(function(newValue) {
+  //Do something when the value in name changes
+});
+</pre>
+
+<p>
+	<a class="btn" href="basic.html">&lt; Previous - Basic Data-binding</a>
+	<a class="btn" href="lists.html">Next - Lists & Collections &gt;</a>
+
+</p>
+<p>
+	<a class="btn" href="../index.html">Home</a>
+</p>
+
+<div>
+<script src="../lib/google-code-prettify/prettify.js"></script>
+<script src="../lib/knockout-2.2.1.js"></script>
+<script src="../lib/knockout.mapping-2.4.1.js"></script>
+
+<script>
+var ViewModel = function(first, last) {
+    this.firstName = ko.observable(first);
+    this.lastName = ko.observable(last);
+ 
+    this.fullName = ko.computed(function() {
+        // Knockout tracks dependencies automatically. It knows that fullName depends on firstName and lastName, because these get called when evaluating fullName.
+        return this.firstName() + " " + this.lastName();
+    }, this);
+	
+	this.color = ko.observable();
+};
+
+ 
+ko.applyBindings(new ViewModel("My", "Friend"));
+</script>
+</body>
+</html>
